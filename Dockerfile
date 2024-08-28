@@ -1,12 +1,12 @@
 # build the epubcheck.jar file
-FROM maven:slim as builder
+FROM maven:3.8.4-openjdk-17-slim as builder
 
 WORKDIR /app
 COPY . .
 RUN mvn clean install
 
 # prepare runner for epubcheck.jar execution
-FROM openjdk:slim
+FROM openjdk:17-slim
 
 WORKDIR /app
 COPY --from=builder /app .
